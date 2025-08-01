@@ -331,32 +331,50 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mockTestimonials.map((testimonial, index) => (
-              <Card 
-                key={testimonial.id}
-                className="bg-black border-gray-800 hover:border-thunder-yellow transition-all duration-300 hover:scale-105"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Avatar className="mr-3">
-                      <AvatarFallback className="bg-thunder-yellow text-black font-black">
-                        {testimonial.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-bold text-white">{testimonial.name}</p>
-                      <div className="flex gap-1">
-                        {renderStars(testimonial.rating)}
+            {loading ? (
+              // Show skeleton loaders while loading
+              [...Array(4)].map((_, index) => (
+                <TestimonialSkeleton key={index} />
+              ))
+            ) : error ? (
+              // Show error message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No se pudieron cargar los testimonios</p>
+              </div>
+            ) : testimonials.length === 0 ? (
+              // Show no testimonials message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No hay testimonios disponibles</p>
+              </div>
+            ) : (
+              // Show testimonials
+              testimonials.map((testimonial, index) => (
+                <Card 
+                  key={testimonial.id}
+                  className="bg-black border-gray-800 hover:border-thunder-yellow transition-all duration-300 hover:scale-105"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <Avatar className="mr-3">
+                        <AvatarFallback className="bg-thunder-yellow text-black font-black">
+                          {testimonial.initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-bold text-white">{testimonial.name}</p>
+                        <div className="flex gap-1">
+                          {renderStars(testimonial.rating)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <p className="text-gray-300 font-medium leading-relaxed">
-                    "{testimonial.review}"
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                    <p className="text-gray-300 font-medium leading-relaxed">
+                      "{testimonial.review}"
+                    </p>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </section>
