@@ -226,35 +226,53 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {watchProducts.map((product, index) => (
-              <Card 
-                key={product.id}
-                className="bg-black border-thunder-yellow border-2 overflow-hidden group hover:border-thunder-red transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-thunder-yellow/20"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <Badge className="absolute top-4 left-4 bg-thunder-yellow text-black font-bold">
-                    {product.category.toUpperCase()}
-                  </Badge>
-                  <div className="absolute top-4 right-4 bg-thunder-red text-white px-2 py-1 rounded text-sm font-bold">
-                    ¡DESTACADO!
+            {loading ? (
+              // Show skeleton loaders while loading
+              [...Array(4)].map((_, index) => (
+                <ProductSkeleton key={index} />
+              ))
+            ) : error ? (
+              // Show error message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No se pudieron cargar los relojes</p>
+              </div>
+            ) : watchProducts.length === 0 ? (
+              // Show no watches message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No hay relojes disponibles</p>
+              </div>
+            ) : (
+              // Show watches
+              watchProducts.map((product, index) => (
+                <Card 
+                  key={product.id}
+                  className="bg-black border-thunder-yellow border-2 overflow-hidden group hover:border-thunder-red transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-thunder-yellow/20"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <Badge className="absolute top-4 left-4 bg-thunder-yellow text-black font-bold">
+                      {product.category.toUpperCase()}
+                    </Badge>
+                    <div className="absolute top-4 right-4 bg-thunder-red text-white px-2 py-1 rounded text-sm font-bold">
+                      ¡DESTACADO!
+                    </div>
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-black text-white mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-2xl font-black text-thunder-yellow">
-                    {product.price}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-black text-white mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-black text-thunder-yellow">
+                      {product.price}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </section>
