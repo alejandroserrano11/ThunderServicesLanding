@@ -190,7 +190,7 @@ async def startup_event():
 async def shutdown_db_client():
     """Close database connection on shutdown"""
     try:
-        client.close()
+        Database.close_connection()
         logger.info("Database connection closed")
     except Exception as e:
         logger.error(f"Error during shutdown: {e}")
