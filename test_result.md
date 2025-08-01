@@ -281,15 +281,10 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Spanish Translation"
-    - "Watches Product Highlighting"
-    - "Instagram Links Removal"
-    - "Backend API Integration"
-    - "Loading States and Error Handling"
+  current_focus: []
   stuck_tasks: []
   test_all: true
-  test_priority: "user_experience_focused"
+  test_priority: "comprehensive_frontend_testing_completed"
 
 agent_communication:
   - agent: "main"
