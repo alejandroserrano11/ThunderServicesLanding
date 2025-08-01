@@ -11,7 +11,39 @@ const API = `${BACKEND_URL}/api`;
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
+  const [products, setProducts] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [productsResponse, testimonialsResponse] = await Promise.all([
+          axios.get(`${API}/products`),
+          axios.get(`${API}/testimonials`)
+        ]);
+        
+        setProducts(productsResponse.data);
+        setTestimonials(testimonialsResponse.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load content');
+        // Fallback to empty arrays
+        setProducts([]);
+        setTestimonials([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,7 +65,18 @@ const LandingPage = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleTelegramClick = () => {
+  const handleTelegramClick = async () => {
+    // Track telegram click
+    try {
+      await axios.post(`${API}/telegram-click`, {
+        user_agent: navigator.userAgent,
+        referrer: document.referrer
+      });
+    } catch (err) {
+      console.error('Error tracking telegram click:', err);
+    }
+    
+    // Open telegram
     window.open('https://t.me/thunderxservices', '_blank');
   };
 
@@ -47,8 +90,37 @@ const LandingPage = () => {
   };
 
   // Separate products by category with watches first
-  const watchProducts = mockProducts.filter(p => p.category === 'relojes');
-  const otherProducts = mockProducts.filter(p => p.category !== 'relojes');
+  const watchProducts = products.filter(p => p.category === 'relojes');
+  const otherProducts = products.filter(p => p.category !== 'relojes');
+
+  // Loading skeleton component
+  const ProductSkeleton = () => (
+    <Card className="bg-gray-900 border-gray-800 overflow-hidden animate-pulse">
+      <div className="w-full h-64 bg-gray-700"></div>
+      <CardContent className="p-6">
+        <div className="h-6 bg-gray-700 rounded mb-2"></div>
+        <div className="h-8 bg-gray-700 rounded w-20"></div>
+      </CardContent>
+    </Card>
+  );
+
+  const TestimonialSkeleton = () => (
+    <Card className="bg-black border-gray-800 animate-pulse">
+      <CardContent className="p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 bg-gray-700 rounded-full mr-3"></div>
+          <div>
+            <div className="h-4 bg-gray-700 rounded w-24 mb-2"></div>
+            <div className="h-4 bg-gray-700 rounded w-16"></div>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-4 bg-gray-700 rounded"></div>
+          <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
