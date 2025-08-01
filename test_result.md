@@ -210,6 +210,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "Created dedicated 'RELOJES PREMIUM' section with special yellow borders and 'DESTACADO' badges. Watches appear first in product hierarchy with 4 featured watches."
+      - working: true
+        agent: "testing"
+        comment: "✅ WATCHES HIGHLIGHTING PERFECTLY IMPLEMENTED: Dedicated 'RELOJES PREMIUM' section with 4 watches featuring yellow borders (.border-thunder-yellow), 14 '¡DESTACADO!' badges on featured watches, watch icon in trust indicators, clear visual distinction from other products. Watches prominently displayed first as main product category."
 
   - task: "Instagram Links Removal"
     implemented: true
