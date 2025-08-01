@@ -3,8 +3,11 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { Star, MessageCircle, Zap, Shield, Truck, Watch } from 'lucide-react';
-import { mockProducts, mockTestimonials } from '../mock';
+import { Star, MessageCircle, Zap, Shield, Truck, Watch, Loader2 } from 'lucide-react';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
