@@ -298,32 +298,50 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {otherProducts.map((product, index) => (
-              <Card 
-                key={product.id}
-                className="bg-gray-900 border-gray-800 overflow-hidden group hover:border-thunder-yellow transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-thunder-yellow/10"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <Badge className="absolute top-4 left-4 bg-thunder-red text-white font-bold">
-                    {product.category.toUpperCase()}
-                  </Badge>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-black text-white mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-2xl font-black text-thunder-yellow">
-                    {product.price}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+            {loading ? (
+              // Show skeleton loaders while loading
+              [...Array(6)].map((_, index) => (
+                <ProductSkeleton key={index} />
+              ))
+            ) : error ? (
+              // Show error message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No se pudieron cargar los productos</p>
+              </div>
+            ) : otherProducts.length === 0 ? (
+              // Show no products message
+              <div className="col-span-full text-center text-gray-400">
+                <p>No hay productos disponibles</p>
+              </div>
+            ) : (
+              // Show other products
+              otherProducts.map((product, index) => (
+                <Card 
+                  key={product.id}
+                  className="bg-gray-900 border-gray-800 overflow-hidden group hover:border-thunder-yellow transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-thunder-yellow/10"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <Badge className="absolute top-4 left-4 bg-thunder-red text-white font-bold">
+                      {product.category.toUpperCase()}
+                    </Badge>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-black text-white mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-black text-thunder-yellow">
+                      {product.price}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </section>
