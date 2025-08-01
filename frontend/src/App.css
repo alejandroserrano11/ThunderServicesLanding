@@ -64,6 +64,150 @@ body {
   box-shadow: 0 25px 50px -12px rgba(255, 0, 0, 0.25) !important;
 }
 
+/* Perimeter Lightning Animation */
+.perimeter-lightning-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lightning-perimeter {
+  position: absolute;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--thunder-yellow) 25%, 
+    var(--thunder-red) 50%, 
+    var(--thunder-yellow) 75%, 
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 10px var(--thunder-yellow)) 
+          drop-shadow(0 0 20px var(--thunder-red))
+          drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+}
+
+.lightning-perimeter.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--thunder-yellow) 25%, 
+    var(--thunder-red) 50%, 
+    var(--thunder-yellow) 75%, 
+    transparent 100%
+  );
+  animation: lightningPerimeterHorizontal 4s ease-in-out infinite;
+}
+
+.lightning-perimeter.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--thunder-red) 25%, 
+    var(--thunder-yellow) 50%, 
+    var(--thunder-red) 75%, 
+    transparent 100%
+  );
+  animation: lightningPerimeterHorizontal 4s ease-in-out infinite 2s;
+}
+
+.lightning-perimeter.left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    var(--thunder-yellow) 25%, 
+    var(--thunder-red) 50%, 
+    var(--thunder-yellow) 75%, 
+    transparent 100%
+  );
+  animation: lightningPerimeterVertical 4s ease-in-out infinite 1s;
+}
+
+.lightning-perimeter.right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 4px;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    var(--thunder-red) 25%, 
+    var(--thunder-yellow) 50%, 
+    var(--thunder-red) 75%, 
+    transparent 100%
+  );
+  animation: lightningPerimeterVertical 4s ease-in-out infinite 3s;
+}
+
+@keyframes lightningPerimeterHorizontal {
+  0% { 
+    opacity: 0.3; 
+    transform: scaleX(0.8); 
+    filter: drop-shadow(0 0 5px var(--thunder-yellow));
+  }
+  25% { 
+    opacity: 1; 
+    transform: scaleX(1.1); 
+    filter: drop-shadow(0 0 15px var(--thunder-yellow)) 
+            drop-shadow(0 0 25px var(--thunder-red));
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scaleX(1); 
+    filter: drop-shadow(0 0 20px var(--thunder-red));
+  }
+  75% { 
+    opacity: 1; 
+    transform: scaleX(1.05); 
+    filter: drop-shadow(0 0 15px var(--thunder-yellow)) 
+            drop-shadow(0 0 25px var(--thunder-red))
+            drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
+  }
+  100% { 
+    opacity: 0.4; 
+    transform: scaleX(0.9); 
+    filter: drop-shadow(0 0 8px var(--thunder-yellow));
+  }
+}
+
+@keyframes lightningPerimeterVertical {
+  0% { 
+    opacity: 0.3; 
+    transform: scaleY(0.8); 
+    filter: drop-shadow(0 0 5px var(--thunder-red));
+  }
+  25% { 
+    opacity: 1; 
+    transform: scaleY(1.1); 
+    filter: drop-shadow(0 0 15px var(--thunder-red)) 
+            drop-shadow(0 0 25px var(--thunder-yellow));
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scaleY(1); 
+    filter: drop-shadow(0 0 20px var(--thunder-yellow));
+  }
+  75% { 
+    opacity: 1; 
+    transform: scaleY(1.05); 
+    filter: drop-shadow(0 0 15px var(--thunder-red)) 
+            drop-shadow(0 0 25px var(--thunder-yellow))
+            drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
+  }
+  100% { 
+    opacity: 0.4; 
+    transform: scaleY(0.9); 
+    filter: drop-shadow(0 0 8px var(--thunder-red));
+  }
+}
+
 /* Enhanced Constant Lightning Animation */
 .lightning-bolt-constant {
   pointer-events: none;
@@ -439,6 +583,20 @@ img[alt*="Thunder Services Logo"]:hover {
   .lightning-svg-constant {
     width: 60px;
     height: 80px;
+  }
+
+  .lightning-perimeter {
+    opacity: 0.6;
+  }
+
+  .lightning-perimeter.top,
+  .lightning-perimeter.bottom {
+    height: 2px;
+  }
+
+  .lightning-perimeter.left,
+  .lightning-perimeter.right {
+    width: 2px;
   }
 }
 

@@ -152,15 +152,25 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section with Perimeter Lightning */}
       <section 
         id="hero" 
         data-animate
-        className={`min-h-screen flex items-center justify-center px-4 transition-all duration-1000 transform ${
+        className={`min-h-screen flex items-center justify-center px-4 transition-all duration-1000 transform relative ${
           isVisible.hero ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'
         }`}
       >
-        <div className="text-center max-w-4xl mx-auto">
+        {/* Perimeter Lightning Animation */}
+        <div className="absolute inset-4 pointer-events-none">
+          <div className="perimeter-lightning-container">
+            <div className="lightning-perimeter top"></div>
+            <div className="lightning-perimeter right"></div>
+            <div className="lightning-perimeter bottom"></div>
+            <div className="lightning-perimeter left"></div>
+          </div>
+        </div>
+
+        <div className="text-center max-w-4xl mx-auto relative z-10">
           <div className="mb-8">
             <div className="flex items-center justify-center mb-6 animate-float">
               <img 
@@ -461,23 +471,33 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section with Perimeter Lightning */}
       <section 
         id="cta" 
         data-animate
-        className={`py-32 px-4 transition-all duration-1200 transform ${
+        className={`py-32 px-4 transition-all duration-1200 transform relative ${
           isVisible.cta ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-32 scale-95'
         }`}
       >
-        <div className="container mx-auto max-w-4xl text-center">
+        {/* Perimeter Lightning Animation for CTA */}
+        <div className="absolute inset-4 pointer-events-none">
+          <div className="perimeter-lightning-container">
+            <div className="lightning-perimeter top"></div>
+            <div className="lightning-perimeter right"></div>
+            <div className="lightning-perimeter bottom"></div>
+            <div className="lightning-perimeter left"></div>
+          </div>
+        </div>
+
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
           <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight animate-text-glow">
             <span className="text-white">¿QUIERES SER PARTE</span>
             <br />
-            <span className="text-thunder-red">DE LA FAMILIA?</span>
+            <span className="text-thunder-red">DE LA COMUNIDAD?</span>
           </h2>
           
           <p className="text-2xl text-gray-300 font-bold mb-12 animate-fade-in-up">
-            Únete a miles que reciben ofertas exclusivas y los mejores precios en 
+            Únete a cientos de personas que reciben ofertas exclusivas y los mejores precios en 
             <span className="text-thunder-yellow"> THUNDER</span>
             <span className="text-thunder-red"> SERVICES</span>
           </p>
@@ -492,7 +512,7 @@ const LandingPage = () => {
           </Button>
 
           <p className="text-lg text-gray-400 font-semibold animate-fade-in-delayed">
-            Sin spam, solo ofertas increíbles • unirse es gratis
+            Sin spam, solo ofertas increíbles • Unirse es gratis
           </p>
         </div>
       </section>
