@@ -64,6 +64,75 @@ body {
   box-shadow: 0 25px 50px -12px rgba(255, 0, 0, 0.25) !important;
 }
 
+/* Lightning Animation Styles */
+.thunder-hero-title {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.lightning-bolt {
+  pointer-events: none;
+  z-index: 10;
+}
+
+.lightning-svg {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+  animation: lightningPulse 1.5s ease-in-out infinite;
+}
+
+.lightning-path {
+  animation: lightningFlicker 0.1s ease-in-out infinite alternate;
+}
+
+@keyframes lightningPulse {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes lightningFlicker {
+  0% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+.thunder-hero-title:hover .lightning-bolt {
+  animation: lightningStrike 0.6s ease-out;
+}
+
+@keyframes lightningStrike {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced Lightning Effects */
+.group:hover .lightning-svg {
+  animation: lightningPulse 0.3s ease-in-out infinite, lightningGlow 1s ease-in-out infinite;
+}
+
+@keyframes lightningGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 1)) drop-shadow(0 0 30px rgba(255, 0, 0, 0.5));
+  }
+}
+
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
@@ -183,6 +252,17 @@ html {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Logo Enhancements */
+img[alt*="Thunder Services Logo"] {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+img[alt*="Thunder Services Logo"]:hover {
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 0, 0.3));
+  transform: scale(1.05);
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
   .text-6xl {
@@ -196,6 +276,16 @@ html {
   .py-32 {
     padding-top: 5rem;
     padding-bottom: 5rem;
+  }
+
+  .lightning-bolt {
+    right: -4px !important;
+    top: -2px !important;
+  }
+
+  .lightning-svg {
+    width: 40px;
+    height: 60px;
   }
 }
 
@@ -244,3 +334,21 @@ a:focus-visible {
 .grid-item:nth-child(4) { animation-delay: 0.4s; }
 .grid-item:nth-child(5) { animation-delay: 0.5s; }
 .grid-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Enhanced Thunder Branding */
+.thunder-brand-text {
+  background: linear-gradient(45deg, var(--thunder-yellow), var(--thunder-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Lightning Effect on Hover for All Thunder Text */
+.thunder-text-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.thunder-text-hover:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3);
+}

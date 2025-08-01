@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { Star, MessageCircle, Zap, Shield, Truck, Watch, Loader2 } from 'lucide-react';
+import { Star, MessageCircle, Zap, Truck, Watch } from 'lucide-react';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -128,8 +128,16 @@ const LandingPage = () => {
       <header className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-black text-thunder-yellow">
-              ⚡ THUNDER SERVICES
+            <div className="flex items-center gap-3">
+              <img 
+                src="/thunder-logo.png" 
+                alt="Thunder Services Logo" 
+                className="h-10 w-auto"
+              />
+              <div className="text-xl font-black">
+                <span className="text-thunder-yellow">THUNDER</span>
+                <span className="text-thunder-red"> SERVICES</span>
+              </div>
             </div>
             <Button
               onClick={handleTelegramClick}
@@ -152,11 +160,43 @@ const LandingPage = () => {
       >
         <div className="text-center max-w-4xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
-              <span className="text-thunder-yellow">THUNDER</span>
-              <br />
-              <span className="text-white">SERVICES</span>
-            </h1>
+            <div className="flex items-center justify-center mb-6">
+              <img 
+                src="/thunder-logo.png" 
+                alt="Thunder Services Logo" 
+                className="h-24 w-auto mr-4"
+              />
+            </div>
+            <div className="thunder-hero-title group cursor-pointer inline-block">
+              <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight relative">
+                <span className="text-thunder-yellow">THUNDER</span>
+                <br />
+                <span className="text-thunder-red">SERVICES</span>
+                
+                {/* Lightning Animation */}
+                <div className="lightning-bolt absolute -top-4 -right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
+                  <svg 
+                    width="80" 
+                    height="120" 
+                    viewBox="0 0 80 120" 
+                    className="lightning-svg"
+                  >
+                    <path 
+                      d="M45 10 L20 50 L35 50 L30 110 L55 70 L40 70 Z" 
+                      fill="url(#lightningGradient)"
+                      className="lightning-path"
+                    />
+                    <defs>
+                      <linearGradient id="lightningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFFF00" />
+                        <stop offset="50%" stopColor="#FFD700" />
+                        <stop offset="100%" stopColor="#FF0000" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </h1>
+            </div>
             <div className="w-32 h-1 bg-thunder-red mx-auto mb-8"></div>
           </div>
           
@@ -179,12 +219,8 @@ const LandingPage = () => {
             </Button>
           </div>
 
-          {/* Trust Indicators */}
+          {/* Trust Indicators - Removed "100% Auténtico" */}
           <div className="flex flex-wrap justify-center gap-8 mt-16 text-gray-400">
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-thunder-yellow" />
-              <span className="font-semibold">100% Auténtico</span>
-            </div>
             <div className="flex items-center gap-2">
               <Truck className="w-5 h-5 text-thunder-yellow" />
               <span className="font-semibold">Envío Rápido</span>
@@ -221,7 +257,7 @@ const LandingPage = () => {
             </div>
             <div className="w-24 h-1 bg-thunder-red mx-auto mb-6"></div>
             <p className="text-xl text-gray-300 font-semibold">
-              Nuestra especialidad: Relojes de lujo auténticos
+              Nuestra especialidad: Relojes de lujo exclusivos
             </p>
           </div>
 
@@ -431,7 +467,9 @@ const LandingPage = () => {
           </h2>
           
           <p className="text-2xl text-gray-300 font-bold mb-12">
-            Únete a miles que reciben ofertas exclusivas y los mejores precios
+            Únete a miles que reciben ofertas exclusivas y los mejores precios en 
+            <span className="text-thunder-yellow"> THUNDER</span>
+            <span className="text-thunder-red"> SERVICES</span>
           </p>
 
           <Button
@@ -453,8 +491,16 @@ const LandingPage = () => {
       <footer className="bg-gray-950 border-t border-gray-800 py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="text-3xl font-black text-thunder-yellow mb-6 md:mb-0">
-              ⚡ THUNDER SERVICES
+            <div className="flex items-center gap-3 mb-6 md:mb-0">
+              <img 
+                src="/thunder-logo.png" 
+                alt="Thunder Services Logo" 
+                className="h-12 w-auto"
+              />
+              <div className="text-2xl font-black">
+                <span className="text-thunder-yellow">THUNDER</span>
+                <span className="text-thunder-red"> SERVICES</span>
+              </div>
             </div>
             
             <div className="flex gap-6">
@@ -471,7 +517,8 @@ const LandingPage = () => {
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-500 font-semibold">
-              © 2025 Thunder Services. Relojes premium, productos auténticos.
+              © 2025 <span className="text-thunder-yellow">Thunder</span>
+              <span className="text-thunder-red"> Services</span>. Relojes premium, productos exclusivos.
             </p>
           </div>
         </div>
