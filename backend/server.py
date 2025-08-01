@@ -1,7 +1,6 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
@@ -18,11 +17,6 @@ from database import Database
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
 app = FastAPI(title="Thunder Services API", version="1.0.0")
