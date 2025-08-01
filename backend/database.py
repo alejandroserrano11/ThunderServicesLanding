@@ -3,36 +3,50 @@ import os
 from typing import List
 from models import Product, Testimonial, TelegramClick
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Collections
-products_collection = db.products
-testimonials_collection = db.testimonials
-analytics_collection = db.analytics
-
 class Database:
+    _client = None
+    _db = None
+    
+    @classmethod
+    def get_db(cls):
+        if cls._client is None:
+            mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+            db_name = os.environ.get('DB_NAME', 'test_database')
+            cls._client = AsyncIOMotorClient(mongo_url)
+            cls._db = cls._client[db_name]
+        return cls._db
+    
+    @classmethod
+    def get_collections(cls):
+        db = cls.get_db()
+        return {
+            'products': db.products,
+            'testimonials': db.testimonials,
+            'analytics': db.analytics
+        }
+
     # Product operations
     @staticmethod
     async def get_all_products() -> List[Product]:
         """Get all products, with featured (watches) first"""
-        cursor = products_collection.find().sort([("featured", -1), ("category", 1), ("id", 1)])
+        collections = Database.get_collections()
+        cursor = collections['products'].find().sort([("featured", -1), ("category", 1), ("id", 1)])
         products = await cursor.to_list(1000)
         return [Product(**product) for product in products]
     
     @staticmethod
     async def create_product(product: Product) -> Product:
         """Create a new product"""
+        collections = Database.get_collections()
         product_dict = product.dict()
-        await products_collection.insert_one(product_dict)
+        await collections['products'].insert_one(product_dict)
         return product
     
     @staticmethod
     async def get_product_by_id(product_id: int) -> Product:
         """Get product by ID"""
-        product = await products_collection.find_one({"id": product_id})
+        collections = Database.get_collections()
+        product = await collections['products'].find_one({"id": product_id})
         if product:
             return Product(**product)
         return None
@@ -41,15 +55,17 @@ class Database:
     @staticmethod
     async def get_all_testimonials() -> List[Testimonial]:
         """Get all approved testimonials"""
-        cursor = testimonials_collection.find({"approved": True}).sort("id", 1)
+        collections = Database.get_collections()
+        cursor = collections['testimonials'].find({"approved": True}).sort("id", 1)
         testimonials = await cursor.to_list(1000)
         return [Testimonial(**testimonial) for testimonial in testimonials]
     
     @staticmethod
     async def create_testimonial(testimonial: Testimonial) -> Testimonial:
         """Create a new testimonial"""
+        collections = Database.get_collections()
         testimonial_dict = testimonial.dict()
-        await testimonials_collection.insert_one(testimonial_dict)
+        await collections['testimonials'].insert_one(testimonial_dict)
         return testimonial
 
     # Analytics operations
@@ -57,8 +73,9 @@ class Database:
     async def track_telegram_click(click_data: TelegramClick) -> bool:
         """Track telegram button click"""
         try:
+            collections = Database.get_collections()
             click_dict = click_data.dict()
-            await analytics_collection.insert_one(click_dict)
+            await collections['analytics'].insert_one(click_dict)
             return True
         except Exception as e:
             print(f"Error tracking telegram click: {e}")
@@ -67,15 +84,17 @@ class Database:
     @staticmethod
     async def get_telegram_clicks_count() -> int:
         """Get total telegram clicks count"""
-        count = await analytics_collection.count_documents({"event": "telegram_click"})
+        collections = Database.get_collections()
+        count = await collections['analytics'].count_documents({"event": "telegram_click"})
         return count
 
     # Database seeding
     @staticmethod
     async def seed_products():
         """Seed database with initial product data"""
+        collections = Database.get_collections()
         # Check if products already exist
-        existing_count = await products_collection.count_documents({})
+        existing_count = await collections['products'].count_documents({})
         if existing_count > 0:
             print("Products already exist, skipping seed")
             return
@@ -123,8 +142,9 @@ class Database:
     @staticmethod
     async def seed_testimonials():
         """Seed database with initial testimonial data"""
+        collections = Database.get_collections()
         # Check if testimonials already exist
-        existing_count = await testimonials_collection.count_documents({})
+        existing_count = await collections['testimonials'].count_documents({})
         if existing_count > 0:
             print("Testimonials already exist, skipping seed")
             return
@@ -155,3 +175,11 @@ class Database:
         await Database.seed_products()
         await Database.seed_testimonials()
         print("Database seeding completed")
+        
+    @classmethod
+    def close_connection(cls):
+        """Close database connection"""
+        if cls._client:
+            cls._client.close()
+            cls._client = None
+            cls._db = None
