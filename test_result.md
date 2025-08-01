@@ -242,10 +242,15 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Spanish Translation"
+    - "Watches Product Highlighting"
+    - "Instagram Links Removal"
+    - "Backend API Integration"
+    - "Loading States and Error Handling"
   stuck_tasks: []
-  test_all: false
-  test_priority: "completed"
+  test_all: true
+  test_priority: "user_experience_focused"
 
 agent_communication:
   - agent: "main"
@@ -254,3 +259,5 @@ agent_communication:
     message: "✅ COMPREHENSIVE BACKEND TESTING COMPLETED: All 8 critical backend tests passed successfully. Health check, products API (9 items with 4 featured watches), testimonials API (4 Spanish reviews), telegram click tracking, analytics, Spanish content verification, watch prioritization, and database integrity all working perfectly. Backend is production-ready."
   - agent: "main"
     message: "🎉 BACKEND TESTING SUCCESS: All high-priority backend tasks verified and working. Database operations resolved (stuck_count reset to 0). All API endpoints functional, Spanish content accurate, watches properly prioritized. Ready for frontend testing if needed."
+  - agent: "main"
+    message: "User requested comprehensive automated frontend testing for optimal user experience across all devices. Preparing frontend testing focused on Spanish content accuracy, watches prioritization, Telegram-only promotion, API integration, loading states, and mobile responsiveness."
