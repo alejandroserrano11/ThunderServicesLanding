@@ -232,7 +232,7 @@ const LandingPage = () => {
             <Button
               onClick={handleTelegramClick}
               size="lg"
-              className="bg-thunder-red hover:bg-red-600 text-white font-black text-base md:text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow w-full sm:w-auto min-h-[56px]"
+              className="bg-thunder-red hover:bg-red-600 text-white font-black text-base md:text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow max-w-xs sm:max-w-sm min-h-[56px]"
             >
               <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-3" />
               ÚNETE A TELEGRAM
