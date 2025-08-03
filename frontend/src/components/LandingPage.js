@@ -433,31 +433,38 @@ const LandingPage = () => {
                 <p>No hay testimonios disponibles</p>
               </div>
             ) : (
-              // Show testimonials
+              // Show testimonial image placeholders
               testimonials.map((testimonial, index) => (
                 <Card 
                   key={testimonial.id}
-                  className="bg-black border-gray-800 hover:border-thunder-yellow transition-all duration-500 hover:scale-110 animate-testimonial-fade-in"
+                  className="bg-black border-gray-800 hover:border-thunder-yellow transition-all duration-500 hover:scale-110 animate-testimonial-fade-in overflow-hidden"
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <Avatar className="mr-3">
-                        <AvatarFallback className="bg-thunder-yellow text-black font-black">
-                          {testimonial.initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-bold text-white">{testimonial.name}</p>
-                        <div className="flex gap-1">
-                          {renderStars(testimonial.rating)}
+                  <div className="relative">
+                    {/* Placeholder for testimonial image */}
+                    <div className="w-full h-64 bg-gray-800 border-2 border-dashed border-gray-600 flex items-center justify-center">
+                      <div className="text-center text-gray-500">
+                        <div className="mb-2">
+                          <svg className="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                          </svg>
                         </div>
+                        <p className="text-sm font-semibold">Imagen de Reseña</p>
+                        <p className="text-xs">{testimonial.name}</p>
                       </div>
                     </div>
-                    <p className="text-gray-300 font-medium leading-relaxed">
-                      "{testimonial.review}"
-                    </p>
-                  </CardContent>
+                    
+                    {/* Rating overlay */}
+                    <div className="absolute top-4 right-4 bg-thunder-yellow text-black px-2 py-1 rounded-full flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-current" />
+                      <span className="text-sm font-bold">{testimonial.rating}</span>
+                    </div>
+                    
+                    {/* Customer name overlay */}
+                    <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-1 rounded-lg">
+                      <p className="text-sm font-bold">{testimonial.name}</p>
+                    </div>
+                  </div>
                 </Card>
               ))
             )}
