@@ -306,11 +306,16 @@ const LandingPage = () => {
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
                   <div className="relative overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-125 transition-transform duration-700"
-                    />
+                    {/* Placeholder for watch image */}
+                    <div className="w-full h-64 bg-gray-800 border-2 border-dashed border-thunder-yellow flex items-center justify-center">
+                      <div className="text-center text-gray-400">
+                        <div className="mb-3">
+                          <Watch className="w-16 h-16 mx-auto text-thunder-yellow" />
+                        </div>
+                        <p className="text-lg font-bold text-thunder-yellow">RELOJ PREMIUM</p>
+                        <p className="text-sm">Agregar imagen aquí</p>
+                      </div>
+                    </div>
                     <Badge className="absolute top-4 left-4 bg-thunder-yellow text-black font-bold animate-badge-pulse">
                       {product.category.toUpperCase()}
                     </Badge>
