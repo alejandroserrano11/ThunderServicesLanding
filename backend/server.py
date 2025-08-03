@@ -41,15 +41,15 @@ async def root():
 # Product endpoints
 @api_router.get("/products", response_model=List[ProductResponse])
 async def get_products():
-    """Get all products with watches (featured) first"""
+    """Get all products with watches (featured) first - no prices needed"""
     try:
         products = await Database.get_all_products()
         return [ProductResponse(
             id=p.id,
             name=p.name,
             category=p.category,
-            image=p.image,
-            price=p.price,
+            image=p.image,  # Will be None for placeholder products
+            price=p.price,  # Will be None since prices are hidden in frontend
             featured=p.featured
         ) for p in products]
     except Exception as e:
