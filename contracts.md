@@ -1,12 +1,21 @@
 # Thunder Services Backend API Contracts - Updated
 
-## Frontend Changes Applied
+## Latest Frontend Changes Applied
 The frontend has been updated with:
+- **Hero text updated**: "Destacamos en relojes de lujo y zapatillas" (more focused message)
+- **Mobile button optimized**: Proportional width instead of full-width
 - **No prices displayed** - Products show only names and categories
 - **Placeholder images** - All product images replaced with placeholders
 - **Image-based testimonials** - Testimonials now use image placeholders instead of text cards
 - **Mobile-first design** - Fully responsive and optimized for mobile devices
 - **Spanish content** - All content is in Spanish for target audience
+
+## Content Strategy Alignment
+- **Primary focus**: Relojes de lujo (luxury watches) - featured products
+- **Secondary focus**: Zapatillas (sneakers) - complementary products  
+- **Removed emphasis**: Ropa (clothing) - de-emphasized in messaging
+- **Target audience**: Spanish-speaking mobile users from TikTok
+- **Conversion goal**: Drive traffic to Telegram channel
 
 ## Current Backend Endpoints
 
@@ -14,6 +23,7 @@ The frontend has been updated with:
 - **Purpose**: Fetch all products for display in gallery
 - **Response**: Array of product objects (prices optional, images optional)
 - **Frontend Usage**: Products displayed with placeholders, no prices shown
+- **Product hierarchy**: 4 featured watches → 3 sneakers → 2 clothing items
 - **Changes**: image and price fields are now optional (None/null values supported)
 
 ### GET /api/testimonials  
@@ -26,86 +36,97 @@ The frontend has been updated with:
 - **Purpose**: Track Telegram button clicks for analytics
 - **Body**: `{ user_agent, referrer }`
 - **Response**: `{ success: true }`
-- **Frontend Usage**: Called when user clicks any Telegram CTA button
+- **Frontend Usage**: Called when user clicks any Telegram CTA button (mobile optimized)
 
 ### GET /api/analytics/telegram-clicks
 - **Purpose**: Get total telegram clicks count
 - **Response**: `{ total_clicks: number }`
-- **Usage**: Analytics dashboard
+- **Usage**: Analytics dashboard for mobile conversion tracking
 
-### PUT /api/products/{id}/image (New)
+### PUT /api/products/{id}/image (Admin)
 - **Purpose**: Update product image URL when real images are uploaded
 - **Body**: image_url string
 - **Response**: Success confirmation
 
-### PUT /api/testimonials/{id}/image (New)
+### PUT /api/testimonials/{id}/image (Admin)
 - **Purpose**: Update testimonial review image URL
 - **Body**: image_url string  
 - **Response**: Success confirmation
 
-### GET /api/admin/summary (New)
+### GET /api/admin/summary (Admin)
 - **Purpose**: Get admin dashboard overview
 - **Response**: Products count, testimonials stats, analytics summary
 
-## Database Schema Updates
+### POST /api/admin/reseed (Admin)
+- **Purpose**: Clear and reseed database with updated data
+- **Response**: Success confirmation
 
-### Products Collection
+## Database Schema - Current Structure
+
+### Products Collection (9 items)
 ```javascript
 {
   _id: ObjectId,
   id: Number,
-  name: String,
-  category: String, // "relojes", "zapatillas", "ropa"
-  image: String | null, // Optional - placeholders used in frontend
-  price: String | null, // Optional - not displayed in frontend
-  featured: Boolean, // true for watches (highlighted section)
+  name: String,                 // Spanish product names
+  category: String,             // "relojes" (4), "zapatillas" (3), "ropa" (2)
+  image: String | null,         // Optional - placeholders used in frontend
+  price: String | null,         // Optional - not displayed in frontend
+  featured: Boolean,            // true for watches (highlighted section)
   createdAt: Date
 }
+
+// Current products:
+// 1-4: Relojes (featured: true) - Primary focus
+// 5-7: Zapatillas (featured: false) - Secondary focus  
+// 8-9: Ropa (featured: false) - Minimal presence
 ```
 
-### Testimonials Collection
+### Testimonials Collection (4 items)
 ```javascript
 {
   _id: ObjectId,
   id: Number,
-  name: String,
-  rating: Number,
-  review: String,
-  initials: String,
-  review_image: String | null, // New field for review images
-  approved: Boolean,
+  name: String,                 // Spanish names: Carlos, María, Diego, Sofía
+  rating: Number,               // 5, 5, 5, 4 (average: 4.75)
+  review: String,               // Spanish reviews mentioning watches
+  initials: String,             // CM, MG, DR, SH
+  review_image: String | null,  // New field for review images
+  approved: Boolean,            // true for all current testimonials
   createdAt: Date
 }
 ```
 
-### Analytics Collection (Unchanged)
+### Analytics Collection (N items)
 ```javascript
 {
   _id: ObjectId,
-  event: String, // "telegram_click"
+  event: String,                // "telegram_click"
   timestamp: Date,
-  userAgent: String,
-  referrer: String
+  userAgent: String,            // Mobile user agent tracking
+  referrer: String              // TikTok traffic source tracking
 }
 ```
 
-## Implementation Status
-- ✅ **Models updated** - Optional fields for images and prices
-- ✅ **Seed data updated** - Spanish names, no prices, no image URLs
-- ✅ **Endpoints updated** - Handle optional fields properly  
-- ✅ **New admin endpoints** - Image management and dashboard
-- ✅ **Mobile optimization** - Backend ready for mobile-first frontend
-
-## Frontend Integration Status
+## Frontend-Backend Integration Status
+- ✅ **Hero messaging updated** - Frontend hardcoded text aligned with product strategy
+- ✅ **Mobile optimization** - Backend serves data optimized for mobile consumption
 - ✅ **No prices displayed** - Backend still stores them but frontend ignores
 - ✅ **Placeholder images** - Frontend uses placeholders regardless of backend image URLs
-- ✅ **Spanish testimonials** - Backend serves Spanish content
-- ✅ **Mobile responsive** - Backend unchanged, frontend fully optimized
-- ✅ **Analytics tracking** - Telegram clicks tracked for mobile users
+- ✅ **Spanish testimonials** - Backend serves Spanish content for target audience
+- ✅ **Analytics tracking** - Backend tracks mobile conversions from TikTok to Telegram
+- ✅ **Product hierarchy** - Backend structure supports watches > sneakers > clothing focus
 
-## Next Steps for Image Management
-1. **Product images**: Replace placeholders by updating via PUT /api/products/{id}/image
-2. **Testimonial images**: Add review images via PUT /api/testimonials/{id}/image  
-3. **Admin dashboard**: Use GET /api/admin/summary for management overview
+## Performance Optimizations
+- **Async database operations** - Non-blocking API responses
+- **Minimal data transfer** - Only essential fields sent to frontend
+- **Mobile-first responses** - Optimized for mobile bandwidth
+- **Cached seed data** - Fast initial page loads
 
-The backend is now fully aligned with the mobile-optimized Spanish frontend.
+## Content Management Ready
+- **Product images**: Replace placeholders via PUT /api/products/{id}/image
+- **Testimonial images**: Add review images via PUT /api/testimonials/{id}/image  
+- **Analytics dashboard**: Monitor TikTok → Telegram conversions
+- **Admin controls**: Full CRUD operations with admin endpoints
+
+The backend is fully aligned with the mobile-optimized Spanish frontend focusing on relojes de lujo and zapatillas as primary products.
