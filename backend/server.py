@@ -201,6 +201,47 @@ async def reseed_database():
         logging.error(f"Error reseeding database: {e}")
         raise HTTPException(status_code=500, detail="Error reseeding database")
 
+@api_router.get("/admin/conversion-stats")
+async def get_conversion_stats():
+    """Get detailed conversion statistics for mobile optimization"""
+    try:
+        # Get analytics data
+        collections = Database.get_collections()
+        total_clicks = await Database.get_telegram_clicks_count()
+        
+        # Get recent clicks (last 24 hours)
+        from datetime import datetime, timedelta
+        yesterday = datetime.utcnow() - timedelta(days=1)
+        recent_clicks = await collections['analytics'].count_documents({
+            "event": "telegram_click",
+            "timestamp": {"$gte": yesterday}
+        })
+        
+        # Get mobile vs desktop clicks (basic heuristic)
+        mobile_clicks_cursor = collections['analytics'].find({
+            "event": "telegram_click",
+            "$or": [
+                {"user_agent": {"$regex": "Mobile", "$options": "i"}},
+                {"user_agent": {"$regex": "iPhone", "$options": "i"}},
+                {"user_agent": {"$regex": "Android", "$options": "i"}}
+            ]
+        })
+        mobile_clicks = await mobile_clicks_cursor.to_list(1000)
+        mobile_percentage = (len(mobile_clicks) / total_clicks * 100) if total_clicks > 0 else 0
+        
+        return {
+            "total_clicks": total_clicks,
+            "recent_clicks_24h": recent_clicks,
+            "mobile_clicks": len(mobile_clicks),
+            "mobile_percentage": round(mobile_percentage, 1),
+            "message_focus": "Destacamos en relojes de lujo y zapatillas",
+            "target_audience": "Spanish-speaking mobile users from TikTok",
+            "conversion_goal": "TikTok → Landing Page → Telegram Channel"
+        }
+    except Exception as e:
+        logging.error(f"Error getting conversion stats: {e}")
+        raise HTTPException(status_code=500, detail="Error getting conversion statistics")
+
 @api_router.get("/admin/summary")
 async def get_admin_summary():
     """Get admin dashboard summary"""
