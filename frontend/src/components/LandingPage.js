@@ -388,9 +388,6 @@ const LandingPage = () => {
                     <h3 className="text-xl font-black text-white mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-2xl font-black text-thunder-yellow">
-                      {product.price}
-                    </p>
                   </CardContent>
                 </Card>
               ))
