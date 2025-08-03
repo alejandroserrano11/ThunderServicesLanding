@@ -176,7 +176,7 @@ const LandingPage = () => {
               <img 
                 src="/thunder-logo.png" 
                 alt="Thunder Services Logo" 
-                className="h-24 w-auto mr-4"
+                className="h-32 w-auto mr-4"
               />
             </div>
             <div className="thunder-hero-title inline-block relative">
