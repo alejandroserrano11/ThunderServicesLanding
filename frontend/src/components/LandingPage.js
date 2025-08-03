@@ -496,7 +496,7 @@ const LandingPage = () => {
       <section 
         id="cta" 
         data-animate
-        className={`py-32 px-4 transition-all duration-1200 transform relative ${
+        className={`py-20 md:py-32 px-4 transition-all duration-1200 transform relative ${
           isVisible.cta ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-32 scale-95'
         }`}
       >
@@ -511,13 +511,13 @@ const LandingPage = () => {
         </div>
 
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight animate-text-glow">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black mb-6 md:mb-8 leading-tight animate-text-glow px-2">
             <span className="text-white">¿QUIERES SER PARTE</span>
             <br />
             <span className="text-thunder-red">DE LA COMUNIDAD?</span>
           </h2>
           
-          <p className="text-2xl text-gray-300 font-bold mb-12 animate-fade-in-up">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-bold mb-8 md:mb-12 animate-fade-in-up px-4 leading-relaxed">
             Únete a cientos de personas que reciben ofertas exclusivas y los mejores precios en 
             <span className="text-thunder-yellow"> THUNDER</span>
             <span className="text-thunder-red"> SERVICES</span>
@@ -526,13 +526,13 @@ const LandingPage = () => {
           <Button
             onClick={handleTelegramClick}
             size="lg"
-            className="bg-thunder-yellow hover:bg-yellow-400 text-black font-black text-2xl px-12 py-6 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-yellow/25 mb-8 animate-cta-pulse"
+            className="bg-thunder-yellow hover:bg-yellow-400 text-black font-black text-lg sm:text-xl md:text-2xl px-8 md:px-12 py-4 md:py-6 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-yellow/25 mb-6 md:mb-8 animate-cta-pulse w-full sm:w-auto min-h-[56px]"
           >
-            <MessageCircle className="w-8 h-8 mr-4" />
+            <MessageCircle className="w-6 h-6 md:w-8 md:h-8 mr-3 md:mr-4" />
             ÚNETE A THUNDER TELEGRAM
           </Button>
 
-          <p className="text-lg text-gray-400 font-semibold animate-fade-in-delayed">
+          <p className="text-base md:text-lg text-gray-400 font-semibold animate-fade-in-delayed px-4">
             Sin spam, solo ofertas increíbles • Unirse es gratis
           </p>
         </div>
