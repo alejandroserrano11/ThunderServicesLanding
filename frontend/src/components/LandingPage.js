@@ -281,7 +281,7 @@ const LandingPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
             {loading ? (
               // Show skeleton loaders while loading
               [...Array(4)].map((_, index) => (
@@ -302,29 +302,29 @@ const LandingPage = () => {
               watchProducts.map((product, index) => (
                 <Card 
                   key={product.id}
-                  className="bg-black border-thunder-yellow border-2 overflow-hidden group hover:border-thunder-red transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-yellow/20 animate-card-float"
+                  className="bg-black border-thunder-yellow border-2 overflow-hidden group hover:border-thunder-red transition-all duration-500 hover:scale-105 md:hover:scale-110 hover:shadow-2xl hover:shadow-thunder-yellow/20 animate-card-float"
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
                   <div className="relative overflow-hidden">
                     {/* Placeholder for watch image */}
-                    <div className="w-full h-64 bg-gray-800 border-2 border-dashed border-thunder-yellow flex items-center justify-center">
+                    <div className="w-full h-48 md:h-64 bg-gray-800 border-2 border-dashed border-thunder-yellow flex items-center justify-center">
                       <div className="text-center text-gray-400">
-                        <div className="mb-3">
-                          <Watch className="w-16 h-16 mx-auto text-thunder-yellow" />
+                        <div className="mb-2 md:mb-3">
+                          <Watch className="w-12 h-12 md:w-16 md:h-16 mx-auto text-thunder-yellow" />
                         </div>
-                        <p className="text-lg font-bold text-thunder-yellow">RELOJ PREMIUM</p>
-                        <p className="text-sm">Agregar imagen aquí</p>
+                        <p className="text-base md:text-lg font-bold text-thunder-yellow">RELOJ PREMIUM</p>
+                        <p className="text-xs md:text-sm">Agregar imagen aquí</p>
                       </div>
                     </div>
-                    <Badge className="absolute top-4 left-4 bg-thunder-yellow text-black font-bold animate-badge-pulse">
+                    <Badge className="absolute top-2 left-2 md:top-4 md:left-4 bg-thunder-yellow text-black font-bold animate-badge-pulse text-xs">
                       {product.category.toUpperCase()}
                     </Badge>
-                    <div className="absolute top-4 right-4 bg-thunder-red text-white px-2 py-1 rounded text-sm font-bold animate-highlight-pulse">
+                    <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-thunder-red text-white px-2 py-1 rounded text-xs font-bold animate-highlight-pulse">
                       ¡DESTACADO!
                     </div>
                   </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-black text-white mb-2">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-black text-white mb-2 leading-tight">
                       {product.name}
                     </h3>
                   </CardContent>
