@@ -156,7 +156,7 @@ const LandingPage = () => {
       <section 
         id="hero" 
         data-animate
-        className={`min-h-screen flex items-center justify-center px-4 transition-all duration-1000 transform relative ${
+        className={`min-h-screen flex items-center justify-center px-4 py-20 transition-all duration-1000 transform relative ${
           isVisible.hero ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'
         }`}
       >
@@ -171,27 +171,27 @@ const LandingPage = () => {
         </div>
 
         <div className="text-center max-w-4xl mx-auto relative z-10">
-          <div className="mb-8">
-            <div className="flex items-center justify-center mb-6 animate-float">
+          <div className="mb-6 md:mb-8">
+            <div className="flex items-center justify-center mb-4 md:mb-6 animate-float">
               <img 
                 src="/thunder-logo.png" 
                 alt="Thunder Services Logo" 
-                className="h-32 w-auto mr-4"
+                className="h-20 md:h-32 w-auto"
               />
             </div>
             <div className="thunder-hero-title inline-block relative">
-              <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight relative animate-title-glow">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-4 md:mb-6 leading-tight relative animate-title-glow">
                 <span className="text-thunder-yellow">THUNDER</span>
                 <br />
                 <span className="text-thunder-red">SERVICES</span>
                 
                 {/* Enhanced Constant Lightning Animation */}
-                <div className="lightning-bolt-constant absolute -top-6 -right-12 opacity-100">
+                <div className="lightning-bolt-constant absolute -top-3 -right-6 md:-top-6 md:-right-12 opacity-100">
                   <svg 
-                    width="100" 
-                    height="140" 
+                    width="60" 
+                    height="80" 
                     viewBox="0 0 100 140" 
-                    className="lightning-svg-constant"
+                    className="lightning-svg-constant md:w-[100px] md:h-[140px]"
                   >
                     <path 
                       d="M55 15 L25 60 L45 60 L35 125 L65 80 L45 80 Z" 
@@ -217,10 +217,10 @@ const LandingPage = () => {
                 </div>
               </h1>
             </div>
-            <div className="w-32 h-1 bg-thunder-red mx-auto mb-8 animate-line-extend"></div>
+            <div className="w-24 md:w-32 h-1 bg-thunder-red mx-auto mb-6 md:mb-8 animate-line-extend"></div>
           </div>
           
-          <p className="text-xl md:text-2xl font-bold text-gray-300 mb-12 leading-relaxed animate-fade-in-delayed">
+          <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-300 mb-8 md:mb-12 leading-relaxed animate-fade-in-delayed px-2">
             Lo mejor en <span className="text-thunder-yellow">relojes de lujo</span>, 
             <span className="text-thunder-red"> zapatillas</span>, y 
             <span className="text-thunder-yellow"> ropa</span>.
@@ -228,29 +228,29 @@ const LandingPage = () => {
             Calidad y ofertas que <span className="text-thunder-red">impactan fuerte</span>.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-buttons-in">
+          <div className="flex flex-col gap-4 justify-center items-center animate-buttons-in">
             <Button
               onClick={handleTelegramClick}
               size="lg"
-              className="bg-thunder-red hover:bg-red-600 text-white font-black text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow"
+              className="bg-thunder-red hover:bg-red-600 text-white font-black text-base md:text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow w-full sm:w-auto min-h-[56px]"
             >
-              <MessageCircle className="w-6 h-6 mr-3" />
+              <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-3" />
               ÚNETE A TELEGRAM
             </Button>
           </div>
 
           {/* Trust Indicators - Removed "100% Auténtico" */}
-          <div className="flex flex-wrap justify-center gap-8 mt-16 text-gray-400 animate-trust-indicators">
-            <div className="flex items-center gap-2 animate-bounce-gentle">
-              <Truck className="w-5 h-5 text-thunder-yellow" />
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-12 md:mt-16 text-gray-400 animate-trust-indicators px-4">
+            <div className="flex items-center gap-2 animate-bounce-gentle text-sm md:text-base">
+              <Truck className="w-4 h-4 md:w-5 md:h-5 text-thunder-yellow flex-shrink-0" />
               <span className="font-semibold">Envío Rápido</span>
             </div>
-            <div className="flex items-center gap-2 animate-bounce-gentle" style={{animationDelay: '0.2s'}}>
-              <Watch className="w-5 h-5 text-thunder-yellow" />
+            <div className="flex items-center gap-2 animate-bounce-gentle text-sm md:text-base" style={{animationDelay: '0.2s'}}>
+              <Watch className="w-4 h-4 md:w-5 md:h-5 text-thunder-yellow flex-shrink-0" />
               <span className="font-semibold">Relojes Premium</span>
             </div>
-            <div className="flex items-center gap-2 animate-bounce-gentle" style={{animationDelay: '0.4s'}}>
-              <Zap className="w-5 h-5 text-thunder-yellow" />
+            <div className="flex items-center gap-2 animate-bounce-gentle text-sm md:text-base" style={{animationDelay: '0.4s'}}>
+              <Zap className="w-4 h-4 md:w-5 md:h-5 text-thunder-yellow flex-shrink-0" />
               <span className="font-semibold">Ofertas Exclusivas</span>
             </div>
           </div>
