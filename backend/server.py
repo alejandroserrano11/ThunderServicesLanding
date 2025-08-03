@@ -183,6 +183,24 @@ async def update_testimonial_image(testimonial_id: int, image_url: str):
         logging.error(f"Error updating testimonial image: {e}")
         raise HTTPException(status_code=500, detail="Error updating testimonial image")
 
+@api_router.post("/admin/reseed")
+async def reseed_database():
+    """Clear and reseed database with updated data"""
+    try:
+        collections = Database.get_collections()
+        
+        # Clear existing data
+        await collections['products'].delete_many({})
+        await collections['testimonials'].delete_many({})
+        
+        # Reseed with updated data
+        await Database.seed_all()
+        
+        return {"success": True, "message": "Database reseeded with updated data (no prices, Spanish content)"}
+    except Exception as e:
+        logging.error(f"Error reseeding database: {e}")
+        raise HTTPException(status_code=500, detail="Error reseeding database")
+
 @api_router.get("/admin/summary")
 async def get_admin_summary():
     """Get admin dashboard summary"""
