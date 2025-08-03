@@ -91,57 +91,39 @@ class Database:
     # Database seeding
     @staticmethod
     async def seed_products():
-        """Seed database with initial product data"""
-        collections = Database.get_collections()
+        """Seed database with updated product data - no prices, no images"""
         # Check if products already exist
+        collections = Database.get_collections()
         existing_count = await collections['products'].count_documents({})
         if existing_count > 0:
             print("Products already exist, skipping seed")
             return
 
         seed_products = [
-            # Watches (featured)
-            Product(id=1, name="Reloj Deportivo de Lujo", category="relojes", 
-                   image="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop", 
-                   price="$299", featured=True),
-            Product(id=2, name="Cronógrafo Estilo Suizo", category="relojes", 
-                   image="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400&h=400&fit=crop", 
-                   price="$399", featured=True),
-            Product(id=3, name="Reloj Digital Premium", category="relojes", 
-                   image="https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=400&h=400&fit=crop", 
-                   price="$249", featured=True),
-            Product(id=4, name="Reloj Elegante Minimalista", category="relojes", 
-                   image="https://images.unsplash.com/photo-1586281380403-90a7ad649393?w=400&h=400&fit=crop", 
-                   price="$199", featured=True),
+            # Watches (featured) - Updated Spanish names
+            Product(id=1, name="Reloj Deportivo de Lujo", category="relojes", featured=True),
+            Product(id=2, name="Cronógrafo Estilo Suizo", category="relojes", featured=True),
+            Product(id=3, name="Reloj Digital Premium", category="relojes", featured=True),
+            Product(id=4, name="Reloj Elegante Minimalista", category="relojes", featured=True),
             
-            # Sneakers
-            Product(id=5, name="Jordan Retro High", category="zapatillas", 
-                   image="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&h=400&fit=crop", 
-                   price="$189"),
-            Product(id=6, name="Air Jordan Low", category="zapatillas", 
-                   image="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop", 
-                   price="$159"),
-            Product(id=7, name="Estilo Nike Dunk", category="zapatillas", 
-                   image="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop", 
-                   price="$169"),
+            # Sneakers - Updated Spanish names
+            Product(id=5, name="Jordan Retro High", category="zapatillas"),
+            Product(id=6, name="Air Jordan Low", category="zapatillas"),
+            Product(id=7, name="Estilo Nike Dunk", category="zapatillas"),
             
-            # Clothing
-            Product(id=8, name="Sudadera Streetwear Diseñador", category="ropa", 
-                   image="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop", 
-                   price="$89"),
-            Product(id=9, name="Chaqueta Urbana Track", category="ropa", 
-                   image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop", 
-                   price="$129")
+            # Clothing - Updated Spanish names
+            Product(id=8, name="Sudadera Streetwear Diseñador", category="ropa"),
+            Product(id=9, name="Chaqueta Urbana Track", category="ropa")
         ]
 
         for product in seed_products:
             await Database.create_product(product)
         
-        print(f"Seeded {len(seed_products)} products")
+        print(f"Seeded {len(seed_products)} products (no prices, placeholder images)")
 
     @staticmethod
     async def seed_testimonials():
-        """Seed database with initial testimonial data"""
+        """Seed database with updated testimonial data - Spanish reviews"""
         collections = Database.get_collections()
         # Check if testimonials already exist
         existing_count = await collections['testimonials'].count_documents({})
@@ -150,24 +132,40 @@ class Database:
             return
 
         seed_testimonials = [
-            Testimonial(id=1, name="Carlos Mendoza", rating=5, 
-                       review="Thunder Services siempre entrega piezas auténticas. ¡Mi reloj llegó en perfectas condiciones y es increíble!", 
-                       initials="CM"),
-            Testimonial(id=2, name="María González", rating=5, 
-                       review="Los mejores precios en relojes de diseñador. La calidad es exactamente como prometieron. ¡Muy recomendado!", 
-                       initials="MG"),
-            Testimonial(id=3, name="Diego Ramírez", rating=5, 
-                       review="Entrega rápida y productos genuinos. Mi lugar favorito para relojes de lujo y zapatillas exclusivas.", 
-                       initials="DR"),
-            Testimonial(id=4, name="Sofía Herrera", rating=4, 
-                       review="Gran selección y atención al cliente. Encontré piezas exclusivas que no pude conseguir en otros lugares.", 
-                       initials="SH")
+            Testimonial(
+                id=1, 
+                name="Carlos Mendoza", 
+                rating=5, 
+                review="Thunder Services siempre entrega piezas auténticas. ¡Mi reloj llegó en perfectas condiciones y es increíble!", 
+                initials="CM"
+            ),
+            Testimonial(
+                id=2, 
+                name="María González", 
+                rating=5, 
+                review="Los mejores precios en relojes de diseñador. La calidad es exactamente como prometieron. ¡Muy recomendado!", 
+                initials="MG"
+            ),
+            Testimonial(
+                id=3, 
+                name="Diego Ramírez", 
+                rating=5, 
+                review="Entrega rápida y productos genuinos. Mi lugar favorito para relojes de lujo y zapatillas exclusivas.", 
+                initials="DR"
+            ),
+            Testimonial(
+                id=4, 
+                name="Sofía Herrera", 
+                rating=4, 
+                review="Gran selección y atención al cliente. Encontré piezas exclusivas que no pude conseguir en otros lugares.", 
+                initials="SH"
+            )
         ]
 
         for testimonial in seed_testimonials:
             await Database.create_testimonial(testimonial)
         
-        print(f"Seeded {len(seed_testimonials)} testimonials")
+        print(f"Seeded {len(seed_testimonials)} testimonials (Spanish reviews, ready for images)")
 
     @staticmethod
     async def seed_all():
