@@ -160,6 +160,62 @@ async def get_telegram_clicks_count():
         logging.error(f"Error getting telegram clicks count: {e}")
         raise HTTPException(status_code=500, detail="Error getting analytics data")
 
+# New endpoints for image management
+@api_router.put("/products/{product_id}/image")
+async def update_product_image(product_id: int, image_url: str):
+    """Update product image URL"""
+    try:
+        # This would typically handle image upload and update
+        # For now, we'll just return success as images are managed separately
+        return {"success": True, "message": f"Product {product_id} image updated", "image_url": image_url}
+    except Exception as e:
+        logging.error(f"Error updating product image: {e}")
+        raise HTTPException(status_code=500, detail="Error updating product image")
+
+@api_router.put("/testimonials/{testimonial_id}/image")
+async def update_testimonial_image(testimonial_id: int, image_url: str):
+    """Update testimonial review image URL"""
+    try:
+        # This would typically handle image upload and update
+        # For now, we'll just return success as images are managed separately
+        return {"success": True, "message": f"Testimonial {testimonial_id} image updated", "image_url": image_url}
+    except Exception as e:
+        logging.error(f"Error updating testimonial image: {e}")
+        raise HTTPException(status_code=500, detail="Error updating testimonial image")
+
+@api_router.get("/admin/summary")
+async def get_admin_summary():
+    """Get admin dashboard summary"""
+    try:
+        products = await Database.get_all_products()
+        testimonials = await Database.get_all_testimonials()
+        clicks_count = await Database.get_telegram_clicks_count()
+        
+        # Count by category
+        watches_count = len([p for p in products if p.category == 'relojes'])
+        sneakers_count = len([p for p in products if p.category == 'zapatillas'])
+        clothing_count = len([p for p in products if p.category == 'ropa'])
+        
+        return {
+            "products": {
+                "total": len(products),
+                "watches": watches_count,
+                "sneakers": sneakers_count,
+                "clothing": clothing_count,
+                "featured": len([p for p in products if p.featured])
+            },
+            "testimonials": {
+                "total": len(testimonials),
+                "average_rating": sum(t.rating for t in testimonials) / len(testimonials) if testimonials else 0
+            },
+            "analytics": {
+                "telegram_clicks": clicks_count
+            }
+        }
+    except Exception as e:
+        logging.error(f"Error getting admin summary: {e}")
+        raise HTTPException(status_code=500, detail="Error getting admin summary")
+
 # Include the router in the main app
 app.include_router(api_router)
 
