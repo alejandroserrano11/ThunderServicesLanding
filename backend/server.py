@@ -85,7 +85,7 @@ async def create_product(product_data: ProductCreate):
 # Testimonial endpoints
 @api_router.get("/testimonials", response_model=List[TestimonialResponse])
 async def get_testimonials():
-    """Get all approved testimonials"""
+    """Get all approved testimonials - ready for image-based reviews"""
     try:
         testimonials = await Database.get_all_testimonials()
         return [TestimonialResponse(
@@ -93,7 +93,8 @@ async def get_testimonials():
             name=t.name,
             rating=t.rating,
             review=t.review,
-            initials=t.initials
+            initials=t.initials,
+            review_image=t.review_image  # New field for review images
         ) for t in testimonials]
     except Exception as e:
         logging.error(f"Error fetching testimonials: {e}")
