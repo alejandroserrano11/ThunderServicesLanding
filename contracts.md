@@ -1,53 +1,53 @@
-# Thunder Services Backend API Contracts
+# Thunder Services Backend API Contracts - Updated
 
-## Current Mock Data Analysis
-The frontend currently uses mock data from `/frontend/src/mock.js`:
+## Frontend Changes Applied
+The frontend has been updated with:
+- **No prices displayed** - Products show only names and categories
+- **Placeholder images** - All product images replaced with placeholders
+- **Image-based testimonials** - Testimonials now use image placeholders instead of text cards
+- **Mobile-first design** - Fully responsive and optimized for mobile devices
+- **Spanish content** - All content is in Spanish for target audience
 
-### 1. Products Data
-```javascript
-mockProducts = [
-  {
-    id: number,
-    name: string,
-    category: "relojes" | "zapatillas" | "ropa", 
-    image: string (URL),
-    price: string
-  }
-]
-```
-
-### 2. Testimonials Data
-```javascript
-mockTestimonials = [
-  {
-    id: number,
-    name: string,
-    rating: number (1-5),
-    review: string,
-    initials: string
-  }
-]
-```
-
-## Required Backend Endpoints
+## Current Backend Endpoints
 
 ### GET /api/products
 - **Purpose**: Fetch all products for display in gallery
-- **Response**: Array of product objects
-- **Frontend Usage**: Replace `mockProducts` import in `LandingPage.js`
+- **Response**: Array of product objects (prices optional, images optional)
+- **Frontend Usage**: Products displayed with placeholders, no prices shown
+- **Changes**: image and price fields are now optional (None/null values supported)
 
 ### GET /api/testimonials  
 - **Purpose**: Fetch customer testimonials
-- **Response**: Array of testimonial objects
-- **Frontend Usage**: Replace `mockTestimonials` import in `LandingPage.js`
+- **Response**: Array of testimonial objects with review_image field
+- **Frontend Usage**: Testimonials shown as image placeholders with name/rating overlays
+- **Changes**: Added review_image field for future image uploads
 
-### POST /api/telegram-click (Optional)
+### POST /api/telegram-click
 - **Purpose**: Track Telegram button clicks for analytics
-- **Body**: `{ timestamp, userAgent, referrer }`
+- **Body**: `{ user_agent, referrer }`
 - **Response**: `{ success: true }`
-- **Frontend Usage**: Add to `handleTelegramClick()` function
+- **Frontend Usage**: Called when user clicks any Telegram CTA button
 
-## Database Schema
+### GET /api/analytics/telegram-clicks
+- **Purpose**: Get total telegram clicks count
+- **Response**: `{ total_clicks: number }`
+- **Usage**: Analytics dashboard
+
+### PUT /api/products/{id}/image (New)
+- **Purpose**: Update product image URL when real images are uploaded
+- **Body**: image_url string
+- **Response**: Success confirmation
+
+### PUT /api/testimonials/{id}/image (New)
+- **Purpose**: Update testimonial review image URL
+- **Body**: image_url string  
+- **Response**: Success confirmation
+
+### GET /api/admin/summary (New)
+- **Purpose**: Get admin dashboard overview
+- **Response**: Products count, testimonials stats, analytics summary
+
+## Database Schema Updates
 
 ### Products Collection
 ```javascript
@@ -55,10 +55,10 @@ mockTestimonials = [
   _id: ObjectId,
   id: Number,
   name: String,
-  category: String,
-  image: String,
-  price: String,
-  featured: Boolean, // true for watches to highlight them
+  category: String, // "relojes", "zapatillas", "ropa"
+  image: String | null, // Optional - placeholders used in frontend
+  price: String | null, // Optional - not displayed in frontend
+  featured: Boolean, // true for watches (highlighted section)
   createdAt: Date
 }
 ```
@@ -72,12 +72,13 @@ mockTestimonials = [
   rating: Number,
   review: String,
   initials: String,
-  approved: Boolean, // for content moderation
+  review_image: String | null, // New field for review images
+  approved: Boolean,
   createdAt: Date
 }
 ```
 
-### Analytics Collection (Optional)
+### Analytics Collection (Unchanged)
 ```javascript
 {
   _id: ObjectId,
@@ -88,28 +89,23 @@ mockTestimonials = [
 }
 ```
 
-## Frontend Integration Plan
+## Implementation Status
+- ✅ **Models updated** - Optional fields for images and prices
+- ✅ **Seed data updated** - Spanish names, no prices, no image URLs
+- ✅ **Endpoints updated** - Handle optional fields properly  
+- ✅ **New admin endpoints** - Image management and dashboard
+- ✅ **Mobile optimization** - Backend ready for mobile-first frontend
 
-1. **Remove mock imports**: Delete `import { mockProducts, mockTestimonials } from '../mock';`
-2. **Add API calls**: Create `useEffect` hooks to fetch data from backend
-3. **Add loading states**: Show skeleton loaders while data loads
-4. **Error handling**: Display fallback content if API fails
-5. **Replace static data**: Use fetched data instead of mock arrays
+## Frontend Integration Status
+- ✅ **No prices displayed** - Backend still stores them but frontend ignores
+- ✅ **Placeholder images** - Frontend uses placeholders regardless of backend image URLs
+- ✅ **Spanish testimonials** - Backend serves Spanish content
+- ✅ **Mobile responsive** - Backend unchanged, frontend fully optimized
+- ✅ **Analytics tracking** - Telegram clicks tracked for mobile users
 
-## Data Migration
-- Seed database with current mock data as initial content
-- Products: 9 items (4 watches, 3 sneakers, 2 clothing)
-- Testimonials: 4 Spanish customer reviews
+## Next Steps for Image Management
+1. **Product images**: Replace placeholders by updating via PUT /api/products/{id}/image
+2. **Testimonial images**: Add review images via PUT /api/testimonials/{id}/image  
+3. **Admin dashboard**: Use GET /api/admin/summary for management overview
 
-## Implementation Priority
-1. **Core API endpoints** (products, testimonials)
-2. **Database seeding** with mock data
-3. **Frontend integration** 
-4. **Analytics tracking** (optional enhancement)
-
-## Notes
-- Landing page is conversion-focused, not e-commerce
-- No user authentication needed
-- No shopping cart or payment processing
-- Primary goal: drive traffic to Telegram channel
-- Backend serves content management for products/testimonials
+The backend is now fully aligned with the mobile-optimized Spanish frontend.
