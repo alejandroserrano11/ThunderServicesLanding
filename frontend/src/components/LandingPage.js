@@ -221,9 +221,8 @@ const LandingPage = () => {
           </div>
           
           <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-300 mb-8 md:mb-12 leading-relaxed animate-fade-in-delayed px-2">
-            Lo mejor en <span className="text-thunder-yellow">relojes de lujo</span>, 
-            <span className="text-thunder-red"> zapatillas</span>, y 
-            <span className="text-thunder-yellow"> ropa</span>.
+            Destacamos en <span className="text-thunder-yellow">relojes de lujo</span> y 
+            <span className="text-thunder-red"> zapatillas</span>.
             <br />
             Calidad y ofertas que <span className="text-thunder-red">impactan fuerte</span>.
           </p>
