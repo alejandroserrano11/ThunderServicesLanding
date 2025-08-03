@@ -380,11 +380,26 @@ const LandingPage = () => {
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
                   <div className="relative overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-125 transition-transform duration-700"
-                    />
+                    {/* Placeholder for product image */}
+                    <div className="w-full h-64 bg-gray-800 border-2 border-dashed border-gray-600 flex items-center justify-center">
+                      <div className="text-center text-gray-400">
+                        <div className="mb-3">
+                          {product.category === 'zapatillas' ? (
+                            <svg className="w-16 h-16 mx-auto text-thunder-red" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M2,18H22L20,20H4L2,18M12,4.74L16.71,9.46C17.1,9.85 17.1,10.47 16.71,10.86L15.29,12.28C14.9,12.67 14.27,12.67 13.88,12.28L12,10.41L10.12,12.28C9.73,12.67 9.1,12.67 8.71,12.28L7.29,10.86C6.9,10.47 6.9,9.85 7.29,9.46L12,4.74M12,1L3,10L12,19L21,10L12,1Z"/>
+                            </svg>
+                          ) : (
+                            <svg className="w-16 h-16 mx-auto text-thunder-red" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 8.12,16.5 8.91,15.66L10.5,16.22L11.44,15.28C11.8,14.92 11.8,14.32 11.44,13.96C11.08,13.6 10.48,13.6 10.12,13.96L9.18,14.9L7.85,14.46C7.32,15.12 6.86,15.84 6.5,16.61C6.27,17.1 6.47,17.68 6.96,17.91C7.03,17.94 7.1,17.96 7.17,17.97C7.63,18.05 8.06,17.76 8.14,17.3C8.18,17.06 8.12,16.81 7.96,16.61L7.07,18.28M16.93,18.28C16.5,17.38 15.88,16.5 15.09,15.66L13.5,16.22L12.56,15.28C12.2,14.92 12.2,14.32 12.56,13.96C12.92,13.6 13.52,13.6 13.88,13.96L14.82,14.9L16.15,14.46C16.68,15.12 17.14,15.84 17.5,16.61C17.73,17.1 17.53,17.68 17.04,17.91C16.97,17.94 16.9,17.96 16.83,17.97C16.37,18.05 15.94,17.76 15.86,17.3C15.82,17.06 15.88,16.81 16.04,16.61L16.93,18.28Z"/>
+                            </svg>
+                          )}
+                        </div>
+                        <p className="text-lg font-bold text-thunder-red">
+                          {product.category === 'zapatillas' ? 'ZAPATILLAS' : 'ROPA'}
+                        </p>
+                        <p className="text-sm">Agregar imagen aquí</p>
+                      </div>
+                    </div>
                     <Badge className="absolute top-4 left-4 bg-thunder-red text-white font-bold animate-badge-pulse">
                       {product.category.toUpperCase()}
                     </Badge>
