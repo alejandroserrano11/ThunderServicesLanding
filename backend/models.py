@@ -33,8 +33,8 @@ class Testimonial(BaseModel):
     id: int
     name: str
     rating: int  # 1-5
-    review: str
-    initials: str
+    review: Optional[str] = ""  # Made optional for image-based reviews
+    initials: Optional[str] = ""  # Made optional for image-based reviews
     review_image: Optional[str] = None  # New field for review images
     approved: bool = True
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -42,8 +42,8 @@ class Testimonial(BaseModel):
 class TestimonialCreate(BaseModel):
     name: str
     rating: int
-    review: str
-    initials: str
+    review: Optional[str] = ""
+    initials: Optional[str] = ""
     review_image: Optional[str] = None
     approved: bool = True
 
@@ -51,8 +51,8 @@ class TestimonialResponse(BaseModel):
     id: int
     name: str
     rating: int
-    review: str
-    initials: str
+    review: Optional[str] = ""
+    initials: Optional[str] = ""
     review_image: Optional[str] = None
 
 # Analytics Models

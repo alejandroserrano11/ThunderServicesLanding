@@ -101,19 +101,17 @@ class Database:
 
         seed_products = [
             # Watches (featured) - Updated Spanish names
-            Product(id=1, name="Reloj Deportivo de Lujo", category="relojes", featured=True),
-            Product(id=2, name="Cronógrafo Estilo Suizo", category="relojes", featured=True),
-            Product(id=3, name="Reloj Digital Premium", category="relojes", featured=True),
-            Product(id=4, name="Reloj Elegante Minimalista", category="relojes", featured=True),
+            Product(id=1, name="Relojes minimalistas", category="relojes", featured=True, image="/images/omega1.JPG"),
+            Product(id=2, name="Mecanismo automático", category="relojes", featured=True, image="/images/omega2.JPG"),
+            Product(id=3, name="Reloj de lujo", category="relojes", featured=True, image="/images/rolex2.jpg"),
+            Product(id=4, name="Reloj estilo deportivo", category="relojes", featured=True, image="/images/rolex1.jpg"),
             
             # Sneakers - Updated Spanish names
-            Product(id=5, name="Jordan Retro High", category="zapatillas"),
-            Product(id=6, name="Air Jordan Low", category="zapatillas"),
-            Product(id=7, name="Estilo Nike Dunk", category="zapatillas"),
-            
-            # Clothing - Updated Spanish names
-            Product(id=8, name="Sudadera Streetwear Diseñador", category="ropa"),
-            Product(id=9, name="Chaqueta Urbana Track", category="ropa")
+            Product(id=5, name="Sneakers deportivas", category="zapatillas", image="/images/pegasus.jpg"),
+            Product(id=6, name="Sneakers low", category="zapatillas", image="/images/jordanlow.jpg"),
+            Product(id=7, name="Sneakers high", category="zapatillas", image="/images/jordan1.jpg"),
+            Product(id=8, name="Sneakers deportivas", category="zapatillas", image="/images/adizero.JPG"),
+            Product(id=9, name="Sneakers basket", category="zapatillas", image="/images/jordan4.JPG")
         ]
 
         for product in seed_products:
@@ -134,31 +132,39 @@ class Database:
         seed_testimonials = [
             Testimonial(
                 id=1, 
-                name="Carlos Mendoza", 
+                name="Cristo", 
                 rating=5, 
-                review="Thunder Services siempre entrega piezas auténticas. ¡Mi reloj llegó en perfectas condiciones y es increíble!", 
-                initials="CM"
+                review="", 
+                initials="",
+                review_image="/images/reseña3.jpg",
+                approved=True
             ),
             Testimonial(
                 id=2, 
-                name="María González", 
+                name="Miguel Angel", 
                 rating=5, 
-                review="Los mejores precios en relojes de diseñador. La calidad es exactamente como prometieron. ¡Muy recomendado!", 
-                initials="MG"
+                review="", 
+                initials="",
+                review_image="/images/reseña4.jpg",
+                approved=True
             ),
             Testimonial(
                 id=3, 
-                name="Diego Ramírez", 
+                name="Alejandro", 
                 rating=5, 
-                review="Entrega rápida y productos genuinos. Mi lugar favorito para relojes de lujo y zapatillas exclusivas.", 
-                initials="DR"
+                review="", 
+                initials="",
+                review_image="/images/reseña2.jpg",
+                approved=True
             ),
             Testimonial(
                 id=4, 
-                name="Sofía Herrera", 
-                rating=4, 
-                review="Gran selección y atención al cliente. Encontré piezas exclusivas que no pude conseguir en otros lugares.", 
-                initials="SH"
+                name="Francisco", 
+                rating=5, 
+                review="", 
+                initials="",
+                review_image="/images/reseña1.jpg",
+                approved=True
             )
         ]
 
