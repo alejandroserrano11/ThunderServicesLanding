@@ -142,11 +142,13 @@ const LandingPage = () => {
               </div>
             </div>
             <Button
-              onClick={handleTelegramClick}
+              asChild
               className="bg-thunder-red hover:bg-red-600 text-white font-bold transition-all duration-300 hover:scale-105"
             >
-              <MessageCircle className="w-4 h-4 mr-2" />
-              ÚNETE AL CANAL
+              <a href="https://t.me/thunderxservices" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="w-4 h-4 mr-2" />
+                ÚNETE AL CANAL
+              </a>
             </Button>
           </div>
         </div>
@@ -229,12 +231,14 @@ const LandingPage = () => {
 
           <div className="flex flex-col gap-4 justify-center items-center animate-buttons-in">
             <Button
-              onClick={handleTelegramClick}
+              asChild
               size="lg"
               className="bg-thunder-red hover:bg-red-600 text-white font-black text-base md:text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow max-w-xs sm:max-w-sm min-h-[56px]"
             >
-              <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-3" />
-              ÚNETE A TELEGRAM
+              <a href="https://t.me/thunderxservices" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-3" />
+                ÚNETE A TELEGRAM
+              </a>
             </Button>
           </div>
 
@@ -553,12 +557,14 @@ const LandingPage = () => {
           </p>
 
           <Button
-            onClick={handleTelegramClick}
+            asChild
             size="lg"
-            className="bg-thunder-yellow hover:bg-yellow-400 text-black font-black text-lg sm:text-xl md:text-2xl px-8 md:px-12 py-4 md:py-6 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-yellow/25 mb-6 md:mb-8 animate-cta-pulse w-full sm:w-auto min-h-[56px]"
+            className="bg-thunder-red hover:bg-red-600 text-white font-black text-base md:text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-thunder-red/25 animate-pulse-glow max-w-xs sm:max-w-sm min-h-[56px]"
           >
-            <MessageCircle className="w-6 h-6 md:w-8 md:h-8 mr-3 md:mr-4" />
-            ÚNETE A THUNDER TELEGRAM
+            <a href="https://t.me/thunderxservices" target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-5 h-5 md:w-6 md:h-6 mr-3" />
+              ÚNETE A TELEGRAM
+            </a>
           </Button>
 
           <p className="text-base md:text-lg text-gray-400 font-semibold animate-fade-in-delayed px-4">
@@ -585,12 +591,14 @@ const LandingPage = () => {
             
             <div className="flex gap-6">
               <Button
-                onClick={handleTelegramClick}
+                asChild
                 variant="outline"
                 className="border-thunder-red text-thunder-red hover:bg-thunder-red hover:text-white font-bold animate-button-glow"
               >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Telegram
+                <a href="https://t.me/thunderxservices" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Telegram
+                </a>
               </Button>
             </div>
           </div>
